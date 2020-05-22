@@ -130,13 +130,14 @@ class XMLPathParser: NSObject, XMLParserDelegate {
     }
     
     internal func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+        self.pushContext()
         self.addElementToPath(elementName)
-        self.currentText = ""
-        self.currentAttributes.removeAll()
         
         if attributeDict.isEmpty == false, let pathID = self.match(path: self.currentPath, with: attributeDict) {
-            //self.currentAttributes = attributeDict
-            self.delegate?.didEncounterPath(parser: self, path: self.currentPath, id: pathID,string: self.currentText, attributes: attributeDict)
+            self.currentAttributes = attributeDict
+            //self.pathID = pathID
+            //self.overwriteContext()
+            //self.delegate?.didEncounterPath(parser: self, path: self.currentPath, id: pathID,string: self.currentText, attributes: attributeDict)
         }
     }
     
@@ -152,9 +153,8 @@ class XMLPathParser: NSObject, XMLParserDelegate {
             }
         }
         
-        self.currentAttributes.removeAll()
-        self.currentText = ""
-        self.currentPath = self.removeLastElement(pathString: self.currentPath)
+        self.popContext()
+        //self.currentPath = self.removeLastElement(pathString: self.currentPath)
     }
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
@@ -260,7 +260,13 @@ class XMLPathParser: NSObject, XMLParserDelegate {
         return nil
     }
     
-    private func pushContext() {
+    private func overwriteContext() {
+        let _ = self.contextStack.dropLast()
+        self.pushContext()
+    }
+    
+    private func pushContext( ) {
+        //self.addElementToPath(element)
         self.contextStack.append(XMLContext(path:self.currentPath,text:self.currentText, attributes: self.currentAttributes))
         self.currentText = ""
         self.currentAttributes.removeAll()
@@ -270,8 +276,9 @@ class XMLPathParser: NSObject, XMLParserDelegate {
         if let context = self.contextStack.last {
             self.currentText = context.currentText
             self.currentAttributes = context.currentAttributes
-            self.contextStack.dropLast()
+            let _ = self.contextStack.dropLast()
         }
+        self.currentPath = self.removeLastElement(pathString: self.currentPath)
     }
     
     private func isNextPopAt( path: String ) -> Bool {

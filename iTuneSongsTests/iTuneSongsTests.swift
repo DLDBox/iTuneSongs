@@ -190,12 +190,15 @@ class iTuneSongsTests: XCTestCase, XMLParserDelegate, XMLDelegate {
     }
     
     func testTunesDataSource() throws {
-        let _ = expectation(description: "Wait for test to complete")
+        let exception = expectation(description: "Wait for test to complete")
         
         let tunesDataSource = iTunesDataSource()
         
         tunesDataSource.songList(completion: { items in
+            XCTAssertTrue(items.count == 10)
             
+            exception.fulfill()
+
         }, failure: {error in } )
         
         self.waitForExpectations(timeout: 10, handler: nil)
