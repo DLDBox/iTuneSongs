@@ -45,4 +45,10 @@ class iTunesServer {
         self.task?.resume()
     }
     
+    func loadItem( item: iTunesItem ) -> iTunesItem {
+        //let loadedItem = iTunesItem()
+        
+        return item
+    }
+    
 }

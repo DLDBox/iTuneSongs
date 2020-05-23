@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D365D052478D760007939AA /* iTunesTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D365D042478D760007939AA /* iTunesTableCell.swift */; };
+		5D365D072478DCB3007939AA /* iTunesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D365D062478DCB3007939AA /* iTunesListViewController.swift */; };
 		5D7BC74A24738D430079A890 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC74924738D430079A890 /* AppDelegate.swift */; };
 		5D7BC74C24738D430079A890 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC74B24738D430079A890 /* SceneDelegate.swift */; };
 		5D7BC74E24738D430079A890 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC74D24738D430079A890 /* ViewController.swift */; };
@@ -45,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D365D042478D760007939AA /* iTunesTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesTableCell.swift; sourceTree = "<group>"; };
+		5D365D062478DCB3007939AA /* iTunesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesListViewController.swift; sourceTree = "<group>"; };
 		5D7BC74624738D430079A890 /* iTuneSongs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTuneSongs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D7BC74924738D430079A890 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D7BC74B24738D430079A890 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -167,6 +171,8 @@
 		5D7BC77A24738D9C0079A890 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5D365D042478D760007939AA /* iTunesTableCell.swift */,
+				5D365D062478DCB3007939AA /* iTunesListViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -327,11 +333,13 @@
 				5D7BC77E24738DEE0079A890 /* Errors.swift in Sources */,
 				5D7BC7882475A1630079A890 /* EndPoint.swift in Sources */,
 				5DEBE1C02477034000EB9709 /* iTunesDataSource.swift in Sources */,
+				5D365D052478D760007939AA /* iTunesTableCell.swift in Sources */,
 				5DEBE1BE2477027400EB9709 /* iTunesServer.swift in Sources */,
 				5D7BC74E24738D430079A890 /* ViewController.swift in Sources */,
 				5D7BC78A2476559E0079A890 /* Model.swift in Sources */,
 				5D7BC77F24738DEE0079A890 /* Closures.swift in Sources */,
 				5D7BC74A24738D430079A890 /* AppDelegate.swift in Sources */,
+				5D365D072478DCB3007939AA /* iTunesListViewController.swift in Sources */,
 				5D7BC74C24738D430079A890 /* SceneDelegate.swift in Sources */,
 				5D7BC78324738E840079A890 /* Extensions.swift in Sources */,
 			);

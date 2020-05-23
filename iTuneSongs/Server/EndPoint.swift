@@ -19,7 +19,7 @@ struct EndPoints {
         case entryImage
     }
     
-    static var topSong  = "https://itunes.apple.com/us/rss/topsongs/limit=10/xml"
+    static var topSong  = "https://itunes.apple.com/us/rss/topsongs/limit=100/xml"
     static var dataElement = "entry"
     static var dicthref = "href"
     static var XMLPaths = [ "feed.title" : XMLItem.mainTitle

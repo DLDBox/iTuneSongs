@@ -29,13 +29,17 @@ class iTunesDataSource: XMLDelegate {
         }, failure: failure )
     }
     
+    func loadiTunesItemURLs( item: iTunesItem ) -> iTunesItem {
+        return tuneServer.loadItem(item: item)
+    }
+    
     //
     //MARk: - XMLDelegate Section
     //
     
     func didEncounterPath(parser: XMLPathParser, path: String, id: Any, string: String) {
         
-        if var current = self.currentItem {
+        if let current = self.currentItem {
             switch id as! EndPoints.XMLItem {
             case .entryName:
                 current.title = string

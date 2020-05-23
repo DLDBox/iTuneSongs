@@ -133,11 +133,8 @@ class XMLPathParser: NSObject, XMLParserDelegate {
         self.pushContext()
         self.addElementToPath(elementName)
         
-        if attributeDict.isEmpty == false, let pathID = self.match(path: self.currentPath, with: attributeDict) {
+        if attributeDict.isEmpty == false, let _ = self.match(path: self.currentPath, with: attributeDict) {
             self.currentAttributes = attributeDict
-            //self.pathID = pathID
-            //self.overwriteContext()
-            //self.delegate?.didEncounterPath(parser: self, path: self.currentPath, id: pathID,string: self.currentText, attributes: attributeDict)
         }
     }
     
@@ -154,7 +151,6 @@ class XMLPathParser: NSObject, XMLParserDelegate {
         }
         
         self.popContext()
-        //self.currentPath = self.removeLastElement(pathString: self.currentPath)
     }
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
@@ -266,7 +262,6 @@ class XMLPathParser: NSObject, XMLParserDelegate {
     }
     
     private func pushContext( ) {
-        //self.addElementToPath(element)
         self.contextStack.append(XMLContext(path:self.currentPath,text:self.currentText, attributes: self.currentAttributes))
         self.currentText = ""
         self.currentAttributes.removeAll()
