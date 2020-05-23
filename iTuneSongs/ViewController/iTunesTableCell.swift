@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 class iTunesTableCell: UITableViewCell {
+    @IBOutlet weak var albumIcon: UIImageView!
+    @IBOutlet weak var iTunesTitle: UILabel!
+    @IBOutlet weak var artist: UILabel!
     
     //
     //MARK: - private section
@@ -19,8 +22,12 @@ class iTunesTableCell: UITableViewCell {
     func set( item: iTunesItem ) {
         self.item = item
         
-        self.textLabel?.text = item.title
+        self.iTunesTitle.text = item.title
+        self.artist.text = item.artist
+        
     }
     
+    @IBAction func didTouchPlay(_ sender: Any) {
+    }
     
 }

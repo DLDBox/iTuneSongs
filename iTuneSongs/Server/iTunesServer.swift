@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIImage
 
 class iTunesServer {
     
@@ -29,7 +29,7 @@ class iTunesServer {
             self?.task = nil
           }
           
-          if let error = error {
+          if let _ = error {
             failure( .unknown )
           } else if let data = data,let response = response as? HTTPURLResponse, response.statusCode == 200 {
             if let xmlString = String(data: data, encoding: .utf8) {
@@ -45,10 +45,29 @@ class iTunesServer {
         self.task?.resume()
     }
     
-    func loadItem( item: iTunesItem ) -> iTunesItem {
-        //let loadedItem = iTunesItem()
+    func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () ) {
         
-        return item
+        if let imageURL = item.image, let url = URL(string: imageURL ) {
+            
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                
+                DispatchQueue.main.async {
+                    if error == nil {
+                        if let data = data {
+                            if let image = UIImage(data: data) {
+                                completion( image )
+                            }
+                        }
+                    } else {
+                        completion( UIImage() )//TODO: replace with real image
+                    }
+                }
+            }).resume()
+        }
     }
+
+    //
+    //MARK: - private methods section
+    //
     
 }

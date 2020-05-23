@@ -8,11 +8,14 @@
 
 import Foundation
 
+/* Literal which are used for the URL endpoints and
+ the XML paths which are to be retrieved from the server.
+ */
 struct EndPoints {
     
     enum XMLItem: Int {
         case mainTitle
-        //case entryCoverArt
+        case entryArt
         case entryName
         case entryPreview
         case entryArtist
@@ -23,7 +26,7 @@ struct EndPoints {
     static var dataElement = "entry"
     static var dicthref = "href"
     static var XMLPaths = [ "feed.title" : XMLItem.mainTitle
-                        //, "feed.entry.link@type,href" : XMLItem.entryCoverArt
+                          , "feed.entry.link@type,href" : XMLItem.entryArt
                           , "feed.entry.title" : XMLItem.entryName
                           , "feed.entry.link@title,href" : XMLItem.entryPreview
                           , "feed.entry.im:artist" : XMLItem.entryArtist

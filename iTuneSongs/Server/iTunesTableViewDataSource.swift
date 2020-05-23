@@ -26,12 +26,18 @@ class iTunesTableViewDataSource: NSObject, UITableViewDataSource {
     //
     
     func loadSongs( completion: @escaping ClosureWithBool ) {
-        self.dataSource.songList(completion: { items in
-            self.items = items
-            completion(true)
-        }, failure: {error in
-            completion(false)
+        
+        NetMinder.shared.accessible( { yes in
+            
+            self.dataSource.songList(completion: { items in
+                self.items = items
+                completion(true)
+            }, failure: {error in
+                completion(false)
+            })
+            
         })
+        
     }
     
     //
@@ -46,12 +52,17 @@ class iTunesTableViewDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let iTuneCell = tableView.dequeueReusableCell(withIdentifier: K.cellName, for: indexPath) as? iTunesTableCell
+        let iTuneCell = tableView.dequeueReusableCell(withIdentifier: K.cellName) as? iTunesTableCell
         
         iTuneCell?.set( item: self.items![indexPath.row] )
-        
+        self.loadImageFor(item: self.items![indexPath.row], completion: { image in
+            iTuneCell?.albumIcon.image = image
+        })
+                
         return iTuneCell!
     }
     
     
 }
+
+

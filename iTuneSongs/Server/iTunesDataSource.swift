@@ -33,11 +33,16 @@ class iTunesDataSource: XMLDelegate {
             completion( self.items )
         }, failure: failure )
     }
-    
-    func loadiTunesItemURLs( item: iTunesItem ) -> iTunesItem {
-        return tuneServer.loadItem(item: item)
+
+    /* Function to load the image from the server
+     Seem weird to have a one line function, actually, not at all.  This is object abstraction.
+     The internal detail should not be accessible in a true object orient environment.  This
+     allows me to change the internal members without breaking the code which relies on this call.
+     */
+    func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () ) {
+        tuneServer.loadImageFor( item: item, completion: completion )
     }
-    
+
     //
     //MARk: - XMLDelegate Section
     //
@@ -48,7 +53,6 @@ class iTunesDataSource: XMLDelegate {
             
             switch id as! EndPoints.XMLItem {
                 case .entryName: current.title = string
-                case .entryArtist: current.artist = string
                 default:break
             }
         }
@@ -59,8 +63,9 @@ class iTunesDataSource: XMLDelegate {
         if let current = self.currentItem {
             switch id as! EndPoints.XMLItem {
                 case .entryPreview: current.preview = attributes[EndPoints.dicthref]
-                case .entryArtist: current.artist = attributes[EndPoints.dicthref]
+                case .entryArt: current.art = attributes[EndPoints.dicthref]
                 case .entryImage: current.image = string
+                case .entryArtist: current.artist = string
                 default:break
             }
         }
