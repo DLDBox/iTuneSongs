@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 /* This object is designed to encapsulate the iTuneServer process
  It handle download and the parsing of the iTune XML file
 
@@ -64,7 +64,10 @@ class iTunesDataSource: XMLDelegate {
             switch id as! EndPoints.XMLItem {
                 case .entryPreview: current.preview = attributes[EndPoints.dicthref]
                 case .entryArt: current.art = attributes[EndPoints.dicthref]
-                case .entryImage: current.image = string
+                case .entryImage:
+                    if attributes["height"] == "55" {
+                        current.image = string
+                    }
                 case .entryArtist: current.artist = string
                 default:break
             }

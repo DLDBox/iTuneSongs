@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import UIImage
+import UIKit
 
 class iTunesServer {
     
@@ -16,7 +16,7 @@ class iTunesServer {
     //
     let session = URLSession(configuration: .default)
     var task: URLSessionDataTask?
-
+    let imageCache = NSCache<NSString, UIImage>()
     
     func topSongXML( _ completion: @escaping ClosureWithString, failure: @escaping ClosureWithError ) {
         
@@ -47,14 +47,21 @@ class iTunesServer {
     
     func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () ) {
         
-        if let imageURL = item.image, let url = URL(string: imageURL ) {
+        if let imageURL = item.image,let cachedImage = imageCache.object(forKey: NSString(string: imageURL)) {
+            completion( cachedImage )
+        } else if let imageURL = item.image, let url = URL(string: imageURL ) {
             
-            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+            self.task = self.session.dataTask(with: url, completionHandler: { (data, response, error) in
+                
+                defer {
+                  self.task = nil
+                }
                 
                 DispatchQueue.main.async {
                     if error == nil {
                         if let data = data {
                             if let image = UIImage(data: data) {
+                                self.imageCache.setObject(image, forKey: NSString(string: imageURL))
                                 completion( image )
                             }
                         }
@@ -62,7 +69,9 @@ class iTunesServer {
                         completion( UIImage() )//TODO: replace with real image
                     }
                 }
-            }).resume()
+            })
+            
+            self.task?.resume()
         }
     }
 

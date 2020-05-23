@@ -55,7 +55,7 @@ class iTunesTableViewDataSource: NSObject, UITableViewDataSource {
         let iTuneCell = tableView.dequeueReusableCell(withIdentifier: K.cellName) as? iTunesTableCell
         
         iTuneCell?.set( item: self.items![indexPath.row] )
-        self.loadImageFor(item: self.items![indexPath.row], completion: { image in
+        self.dataSource.loadImageFor(item: self.items![indexPath.row], completion: { image in
             iTuneCell?.albumIcon.image = image
         })
                 
