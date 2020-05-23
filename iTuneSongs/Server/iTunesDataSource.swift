@@ -8,22 +8,27 @@
 
 import Foundation
 
+/* This object is designed to encapsulate the iTuneServer process
+ It handle download and the parsing of the iTune XML file
+
+ */
 class iTunesDataSource: XMLDelegate {
     
     //
     //MARK: - private member section
     //
-    private var tuneServer = iTunesServer()
-    private var items = [iTunesItem]()
-    private var currentItem: iTunesItem? = nil
+    private var tuneServer = iTunesServer()     // The object download the XML
+    private var items = [iTunesItem]()          // the list of parsed iTune items
+    private var currentItem: iTunesItem? = nil  // The next iTune item to be inserted into the items array
     
     func songList( completion: @escaping ClosureWithiTunes, failure: @escaping ClosureWithError ) {
      
+        // Load XML string for parsing
         tuneServer.topSongXML( { xmlString in
-            let xmlPathParser = XMLPathParser(xmlString: xmlString, delegate: self )
+            let xmlPathParser = XMLPathParser(xmlString: xmlString, delegate: self) // setup the XML parser
             
-            xmlPathParser.addPaths(paths: EndPoints.XMLPaths)
-            xmlPathParser.parse()
+            xmlPathParser.addPaths(paths: EndPoints.XMLPaths)   // Add the parsing criteria (see the XMLPathParser object)
+            xmlPathParser.parse()       // parse the XML using the supplied paths
             
             completion( self.items )
         }, failure: failure )
@@ -40,12 +45,11 @@ class iTunesDataSource: XMLDelegate {
     func didEncounterPath(parser: XMLPathParser, path: String, id: Any, string: String) {
         
         if let current = self.currentItem {
+            
             switch id as! EndPoints.XMLItem {
-            case .entryName:
-                current.title = string
-            case .entryArtist:
-                current.artist = string
-            default:break
+                case .entryName: current.title = string
+                case .entryArtist: current.artist = string
+                default:break
             }
         }
     }
@@ -54,13 +58,10 @@ class iTunesDataSource: XMLDelegate {
         
         if let current = self.currentItem {
             switch id as! EndPoints.XMLItem {
-            case .entryPreview:
-                current.preview = attributes[EndPoints.dicthref]
-            case .entryArtist:
-                current.artist = attributes[EndPoints.dicthref]
-            case .entryImage:
-                current.image = string
-            default:break
+                case .entryPreview: current.preview = attributes[EndPoints.dicthref]
+                case .entryArtist: current.artist = attributes[EndPoints.dicthref]
+                case .entryImage: current.image = string
+                default:break
             }
         }
     }

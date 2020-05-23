@@ -20,6 +20,8 @@ class iTunesListViewController: UITableViewController {
     //MARK: - view life cycle
     //
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         super.tableView.dataSource = self.dataSource
         super.tableView.delegate = self
     }
