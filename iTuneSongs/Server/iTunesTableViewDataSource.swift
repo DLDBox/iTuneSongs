@@ -18,8 +18,8 @@ class iTunesTableViewDataSource: NSObject, UITableViewDataSource {
     //
     //MARK: - private member section
     //
-    let dataSource = iTunesDataSource()
-    var items: [iTunesItem]? = nil
+    private let dataSource = iTunesDataSource()
+    private var items: [iTunesItem]? = nil
 
     //
     //MARK: - public section
@@ -40,8 +40,12 @@ class iTunesTableViewDataSource: NSObject, UITableViewDataSource {
         
     }
     
+    func item( at: Int ) -> iTunesItem? {
+        return self.dataSource.item(at:at)
+    }
+    
     //
-    //MARK: - UITableViewDelegate section
+    //MARK: - UITableViewDataSource section
     //
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -55,6 +59,8 @@ class iTunesTableViewDataSource: NSObject, UITableViewDataSource {
         let iTuneCell = tableView.dequeueReusableCell(withIdentifier: K.cellName) as? iTunesTableCell
         
         iTuneCell?.set( item: self.items![indexPath.row] )
+        iTuneCell?.accessoryType = .disclosureIndicator
+        
         self.dataSource.loadImageFor(item: self.items![indexPath.row], completion: { image in
             iTuneCell?.albumIcon.image = image
         })

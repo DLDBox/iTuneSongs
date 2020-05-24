@@ -42,6 +42,15 @@ class iTunesDataSource: XMLDelegate {
     func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () ) {
         tuneServer.loadImageFor( item: item, completion: completion )
     }
+    
+    /* Get the iTuneItem at a given index
+     */
+    func item( at: Int ) -> iTunesItem? {
+        if at < self.items.count {
+            return self.items[at]
+        }
+        return nil
+    }
 
     //
     //MARk: - XMLDelegate Section
@@ -62,10 +71,10 @@ class iTunesDataSource: XMLDelegate {
         
         if let current = self.currentItem {
             switch id as! EndPoints.XMLItem {
+                case .entryArt: current.art = string
                 case .entryPreview: current.preview = attributes[EndPoints.dicthref]
-                case .entryArt: current.art = attributes[EndPoints.dicthref]
                 case .entryImage:
-                    if attributes["height"] == "55" {
+                    if attributes[EndPoints.imageKey] == EndPoints.imageValue {
                         current.image = string
                     }
                 case .entryArtist: current.artist = string

@@ -35,4 +35,34 @@ class iTunesListViewController: UITableViewController {
         })
     }
     
+    //
+    //MARK: - UITableViewControllerDelegate section
+    //
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        NetMinder.shared.accessible { yes in
+            
+            if yes {
+                DispatchQueue.main.async {
+                    if let item = self.dataSource.item( at: indexPath.row )  {
+                        self.performSegue( withIdentifier: "DetailSegue", sender: item.preview )
+                    }
+                }
+
+            }
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let urlString = sender as! String
+        
+        if let iTuneDetail = segue.destination as? iTunesDetailViewController {
+            iTuneDetail.loadWeb(urlString)
+        } else {
+            print( "Error finding the DetailViewController" )
+        }
+        
+    }
+
 }
