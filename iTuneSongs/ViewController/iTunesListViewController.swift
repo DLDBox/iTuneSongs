@@ -9,6 +9,17 @@
 import Foundation
 import UIKit
 
+/* This class used the iTunesTableVieDataSource to download
+ and supply the iTunes data for display
+ 
+ Each network request is performed within a NetMinder to determine
+ if network connection exist, if not, the closure is execute once
+ the network connection is re-established.
+ 
+ NOTE: The re-establishment of the network connection does not seem
+       to operated correctly on the simulator. So please test the
+       network loss detection on an actual device.
+ */
 class iTunesListViewController: UITableViewController {
     
     //
@@ -46,7 +57,7 @@ class iTunesListViewController: UITableViewController {
             if yes {
                 DispatchQueue.main.async {
                     if let item = self.dataSource.item( at: indexPath.row )  {
-                        self.performSegue( withIdentifier: "DetailSegue", sender: item.art )
+                        self.performSegue( withIdentifier: K.detailSegue, sender: item.art )
                     }
                 }
             }
@@ -74,7 +85,7 @@ class iTunesListViewController: UITableViewController {
             
                 DispatchQueue.main.async {
                     if let item = self.dataSource.item( at: index )  {
-                        self.performSegue( withIdentifier: "DetailSegue", sender: item.preview )
+                        self.performSegue( withIdentifier: K.detailSegue, sender: item.preview )
                     }
                 }
             }

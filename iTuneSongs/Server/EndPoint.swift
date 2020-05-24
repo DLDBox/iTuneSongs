@@ -23,10 +23,6 @@ struct EndPoints {
     }
     
     static var topSong  = "https://itunes.apple.com/us/rss/topsongs/limit=100/xml"
-    static var dataElement = "entry"
-    static var dicthref = "href"
-    static var imageKey = "height"
-    static var imageValue = "55"
     static var XMLPaths = [ "feed.title" : XMLItem.mainTitle
                           , "feed.entry.id" : XMLItem.entryArt
                           , "feed.entry.title" : XMLItem.entryName
@@ -34,5 +30,17 @@ struct EndPoints {
                           , "feed.entry.im:artist" : XMLItem.entryArtist
                           , "feed.entry.im:image" : XMLItem.entryImage
     ]
+}
+
+struct K {
+    
+    static var dataElement = "entry"
+    static var dicthref = "href"
+    static var imageKey = "height"
+    static var imageValue = "55"
+    static var detailSegue = "DetailSegue"
+    static var placeHolder = "Placeholder"
+    
+    static var httpGET = "GET"
     
 }

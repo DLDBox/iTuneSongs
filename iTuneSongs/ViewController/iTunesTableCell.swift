@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class iTunesTableCell: UITableViewCell {
+    
     @IBOutlet weak var albumIcon: UIImageView!
     @IBOutlet weak var iTunesTitle: UILabel!
     @IBOutlet weak var artist: UILabel!

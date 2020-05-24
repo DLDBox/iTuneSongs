@@ -21,6 +21,8 @@ class iTunesDataSource: XMLDelegate {
     private var items = [iTunesItem]()          // the list of parsed iTune items
     private var currentItem: iTunesItem? = nil  // The next iTune item to be inserted into the items array
     
+    /* Return the list of iTuneItems parsed from the XML retrieve from the server
+     */
     func songList( completion: @escaping ClosureWithiTunes, failure: @escaping ClosureWithError ) {
      
         // Load XML string for parsing
@@ -53,7 +55,7 @@ class iTunesDataSource: XMLDelegate {
     }
 
     //
-    //MARk: - XMLDelegate Section
+    //MARK: - XMLDelegate Section
     //
     
     func didEncounterPath(parser: XMLPathParser, path: String, id: Any, string: String) {
@@ -72,9 +74,9 @@ class iTunesDataSource: XMLDelegate {
         if let current = self.currentItem {
             switch id as! EndPoints.XMLItem {
                 case .entryArt: current.art = string
-                case .entryPreview: current.preview = attributes[EndPoints.dicthref]
+                case .entryPreview: current.preview = attributes[K.dicthref]
                 case .entryImage:
-                    if attributes[EndPoints.imageKey] == EndPoints.imageValue {
+                    if attributes[K.imageKey] == K.imageValue {
                         current.image = string
                     }
                 case .entryArtist: current.artist = string
@@ -84,13 +86,13 @@ class iTunesDataSource: XMLDelegate {
     }
     
     func didStartElement( parser: XMLPathParser, element: String ) {
-        if element == EndPoints.dataElement {
+        if element == K.dataElement {
             self.currentItem = iTunesItem()
         }
     }
     
     func didEndElement( parser: XMLPathParser, element: String ) {
-        if element == EndPoints.dataElement, let currentItem = self.currentItem {
+        if element == K.dataElement, let currentItem = self.currentItem {
             self.items.append(currentItem)
             self.currentItem = nil
         }

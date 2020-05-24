@@ -29,7 +29,7 @@ class iTunesServer {
         
         var urlRequest = URLRequest(url: URL(string: EndPoints.topSong)! )
         
-        urlRequest.httpMethod = "GET"
+        urlRequest.httpMethod = K.httpGET
         self.task = self.session.dataTask(with: urlRequest) { [weak self] data, response, error in
             
           defer {
@@ -54,9 +54,9 @@ class iTunesServer {
     
     func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () ) {
         
-        if let imageURL = item.image,let cachedImage = imageCache.object(forKey: NSString(string: imageURL)) {
-            completion( cachedImage )
-        } else if let imageURL = item.image, let url = URL(string: imageURL ) {
+        if let imageURL = item.image,let image = self.imageCache.object(forKey: NSString(string: imageURL)) {
+            completion( image )
+        } else if let imageURL = item.image, let url = URL(string: imageURL) {
             
             self.task = self.session.dataTask(with: url, completionHandler: { (data, response, error) in
                 
@@ -73,7 +73,7 @@ class iTunesServer {
                             }
                         }
                     } else {
-                        let image =  UIImage( named:  "Placeholder" )!
+                        let image =  UIImage( named: K.placeHolder )!
                         completion( image )
                     }
                 }

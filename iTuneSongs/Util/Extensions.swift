@@ -43,13 +43,3 @@ extension UIAlertController {
        }
 }
 
-extension Decodable {
-    
-    init( source: Any ) throws {
-        
-        let data = try JSONSerialization.data(withJSONObject: source, options: .prettyPrinted )
-        let decoder = JSONDecoder()
-        self = try decoder.decode(Self.self, from: data)
-    }
-}
-
