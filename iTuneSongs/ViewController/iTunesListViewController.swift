@@ -46,10 +46,9 @@ class iTunesListViewController: UITableViewController {
             if yes {
                 DispatchQueue.main.async {
                     if let item = self.dataSource.item( at: indexPath.row )  {
-                        self.performSegue( withIdentifier: "DetailSegue", sender: item.preview )
+                        self.performSegue( withIdentifier: "DetailSegue", sender: item.art )
                     }
                 }
-
             }
         }
     }
@@ -62,7 +61,24 @@ class iTunesListViewController: UITableViewController {
         } else {
             print( "Error finding the DetailViewController" )
         }
-        
     }
-
+    
+    //
+    //MARK: - helper section
+    //
+    @IBAction func didTouchPlay(_ sender: UIButton) {
+        NetMinder.shared.accessible { yes in
+            
+            if yes {
+                let index = sender.tag
+            
+                DispatchQueue.main.async {
+                    if let item = self.dataSource.item( at: index )  {
+                        self.performSegue( withIdentifier: "DetailSegue", sender: item.preview )
+                    }
+                }
+            }
+        }
+    }
+    
 }

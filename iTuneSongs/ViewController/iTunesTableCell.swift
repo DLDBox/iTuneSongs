@@ -14,17 +14,17 @@ class iTunesTableCell: UITableViewCell {
     @IBOutlet weak var iTunesTitle: UILabel!
     @IBOutlet weak var artist: UILabel!
     
+    @IBOutlet weak var playButton: UIButton!
     //
-    //MARK: - private section
+    //MARK: - public section
     //
-    var item: iTunesItem? = nil
     
-    func set( item: iTunesItem ) {
-        self.item = item
+    func set( item: iTunesItem, index: Int ) {
         
         self.iTunesTitle.text = item.title
         self.artist.text = item.artist
         
+        playButton.tag = index
     }
     
     @IBAction func didTouchPlay(_ sender: Any) {

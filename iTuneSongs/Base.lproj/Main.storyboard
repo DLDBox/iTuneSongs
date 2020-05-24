@@ -74,6 +74,7 @@
                                             <state key="highlighted" image="PlayButtonPressed"/>
                                             <connections>
                                                 <action selector="didTouchPlay:" destination="aip-6H-u2d" eventType="touchUpInside" id="1yb-uu-tEN"/>
+                                                <action selector="didTouchPlay:" destination="YZf-pr-K37" eventType="touchUpInside" id="JKK-nC-MyX"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -97,6 +98,7 @@
                                     <outlet property="albumIcon" destination="Ncv-TY-ws7" id="5Er-fT-Eax"/>
                                     <outlet property="artist" destination="G2Z-lQ-Jbl" id="4zz-gY-t09"/>
                                     <outlet property="iTunesTitle" destination="jBt-jy-J2S" id="qaR-pE-hqo"/>
+                                    <outlet property="playButton" destination="h2L-5i-fh5" id="sbp-Zy-H49"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

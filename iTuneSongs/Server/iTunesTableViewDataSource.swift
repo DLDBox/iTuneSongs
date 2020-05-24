@@ -58,7 +58,7 @@ class iTunesTableViewDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let iTuneCell = tableView.dequeueReusableCell(withIdentifier: K.cellName) as? iTunesTableCell
         
-        iTuneCell?.set( item: self.items![indexPath.row] )
+        iTuneCell?.set( item: self.items![indexPath.row], index: indexPath.row )
         iTuneCell?.accessoryType = .disclosureIndicator
         
         self.dataSource.loadImageFor(item: self.items![indexPath.row], completion: { image in
