@@ -47,8 +47,9 @@ class XMLPathParser: NSObject, XMLParserDelegate {
     
     private let parser: XMLParser
     private var userPaths = [String : (String?,Any)]() // store the path : (attribute keys?, id)
-    private var contextStack = [XMLContext]()
+    private var contextStack = [XMLContext]() // use to track the descent and acension into and out of element
     
+    // current element being processed
     private var currentText: String = ""
     private var currentPath = String()
     private var currentAttributes = [String : String]()
