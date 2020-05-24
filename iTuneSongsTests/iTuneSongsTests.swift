@@ -20,9 +20,8 @@ class iTuneSongsTests: XCTestCase, XMLParserDelegate, XMLDelegate {
     }
 
     func testExample() throws {
-        let exception = expectation(description: "Wait for test to complete")
+        let _ = expectation(description: "Wait for test to complete")
 
-        //TODO:
         let xml =
         """
         <items>\
@@ -62,9 +61,8 @@ class iTuneSongsTests: XCTestCase, XMLParserDelegate, XMLDelegate {
     
     func testAdditional() throws {
         
-        let exception = expectation(description: "Wait for test to complete")
+        let _ = expectation(description: "Wait for test to complete")
 
-        //TODO:
         let xml =
         """
         <items>\
@@ -91,9 +89,8 @@ class iTuneSongsTests: XCTestCase, XMLParserDelegate, XMLDelegate {
     
     func testAttributeXML() throws {
         
-        let exception = expectation(description: "Wait for test to complete")
+        let _ = expectation(description: "Wait for test to complete")
 
-        //TODO:
         let xml =
         """
         <items>\
@@ -121,9 +118,8 @@ class iTuneSongsTests: XCTestCase, XMLParserDelegate, XMLDelegate {
     
     func testAppleXML() throws {
         
-        let exception = expectation(description: "Wait for test to complete")
+        let _ = expectation(description: "Wait for test to complete")
 
-        //TODO:
         let xml =
         """
         <feed xmlns:im="http://itunes.apple.com/rss" xmlns="http://www.w3.org/2005/Atom" xml:lang="en">\

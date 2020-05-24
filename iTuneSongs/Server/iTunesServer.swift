@@ -12,12 +12,19 @@ import UIKit
 class iTunesServer {
     
     //
-    //MARK: - Private members
+    //MARK: - Private members section
     //
-    let session = URLSession(configuration: .default)
-    var task: URLSessionDataTask?
-    let imageCache = NSCache<NSString, UIImage>()
+    private let session = URLSession(configuration: .default)
+    private var task: URLSessionDataTask?
+    private let imageCache = NSCache<NSString, UIImage>()
     
+    //
+    //MARK: - Public function section
+    //
+    
+    /* A function to retrieve the XML from the Endpoint.topSong.
+     
+     */
     func topSongXML( _ completion: @escaping ClosureWithString, failure: @escaping ClosureWithError ) {
         
         var urlRequest = URLRequest(url: URL(string: EndPoints.topSong)! )
@@ -66,7 +73,8 @@ class iTunesServer {
                             }
                         }
                     } else {
-                        completion( UIImage() )//TODO: replace with real image
+                        let image =  UIImage( named:  "Placeholder" )!
+                        completion( image )
                     }
                 }
             })

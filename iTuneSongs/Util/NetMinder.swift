@@ -28,7 +28,6 @@ class NetMinder {
     //
     static let shared = NetMinder()
     
-
     init() {
         self.netMonitor = NWPathMonitor()
         self.isInternetAccessible = false

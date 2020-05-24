@@ -20,6 +20,9 @@ protocol XMLDelegate {
     func validation( _ parser: XMLPathParser, _ error: Error)
 }
 
+/* Context object to store the state of a element, the need to store the current elemenet
+ state happens as you descend the recursive element structure.  The current element state is
+ store on desceent into a new sub-element, and restored when that sub-element is exited */
 class XMLContext {
     let currentPath: String
     let currentText: String
@@ -50,7 +53,7 @@ class XMLPathParser: NSObject, XMLParserDelegate {
     private var contextStack = [XMLContext]() // use to track the descent and acension into and out of element
     
     // current element being processed
-    private var currentText: String = ""
+    private var currentText = String()
     private var currentPath = String()
     private var currentAttributes = [String : String]()
 
