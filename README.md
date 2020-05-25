@@ -80,7 +80,7 @@ For XML as complex as used by iTunes, there might be duplicate tags with attribu
 ## Network Access and Monitoring 
 To monitor network access I used NWPathMonitor.  When ever net access changes, the accessibility is stored.  If the access is not possible, an Alert is displayed.  By wrapping the network code in a closure, whenever connectivity is restore, the desired call is made. 
 
-#### `func access( _ completion: @escaping (yes)->() )`
+`func access( _ completion: @escaping (yes)->() )`
 
 Example usage:
 
@@ -100,6 +100,5 @@ If there is no connectivity the closure is not called until a connection is made
 The list of iTuneItems, utilizing the iTunesTableViewDataSource to act as the UITableViewDataSource.
 
 ## iTunesDetailViewController ##
-
 Used to display the detail page of the artist and to play the preview audio track.
 
