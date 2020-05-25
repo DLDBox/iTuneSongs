@@ -1,4 +1,4 @@
-# iTuneSongs
+#iTuneSongs
 List popular iTunes songs
 Written by Dana Devoe
 
@@ -7,7 +7,7 @@ Written by Dana Devoe
 This is a simple application used to demonstrate downloading a list XML file containing a list of of popular songs on iTunes parsing the XML into items of iTune elements and displaying the covert art for each item along with Song title and artist in a tableview.
 
 For this challenge I followed the Object Oriented coding concepts.  I used Data encapsulation and aggregation.  I used TDD but I did not completely construct the test to proved automated feedback but mostly to help debug the code as I was creating it.  The XMLParsing is where I spent most of my time.  I flushed it out perhaps a bit more then I should have and I could have added the ability to convert the XML paths into JSON and then use decoder to make the data loading a bit more straightforward.  However, I think that would have taken a bit more time.
-## Server Access ##
+## Server Access
 And EndPoint structure contains the server url strings. Along with XML parsing paths.  The object `iTunesServer` is designed to access the url at EndPoint.topSongs.  It download the XML and delivers it in a closure. 
 
 ####`func topSongXML( _ completion: @escaping ClosureWithString, failure: @escaping ClosureWithError )`
@@ -16,21 +16,19 @@ And EndPoint structure contains the server url strings. Along with XML parsing p
 
 ####`func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () )`
 
-## XML Parsing ##
+XML Parsing
 
 `iTunesDataSource` uses `iTuneServer` to access and retrieve the iTune XML.  While `iTunesDataSource` create a generic data source which can be aggregated into any number of UI datasources such as UICollectionDataSource, but for this exercise aggregate it into a UITableViewDataSource.
 
-####`func songList( completion: @escaping ClosureWithiTunes, failure: @escaping ClosureWithError )`
+`func songList( completion: @escaping ClosureWithiTunes, failure: @escaping ClosureWithError )`
 
 The above call returns a 
 
-## iTunesTableViewDataSource ##
+####iTunesTableViewDataSource
 
 This object implements UITableViewDataSource protocol, while aggregating the iTunesDataSource.
 
-
-
-##XML Path Parsing
+###XML Path Parsing
 This application will demonstrate a XML object XMLPathParse which is designed to make parsing complex XML files much simpler.  A path is provided which represent the XML element to a string, or attribute of interest with in the XML.  The XMLPathParse is giving the paths with an accompanying ID.  As the XMLPathParse executes, it calls out to the XMLDelegate when it finds Path matches.  
 
         let xml =
@@ -79,7 +77,7 @@ For XML as complex as used by iTunes, there might be duplicate tags with attribu
 
         parser.parse()
 
-## Network Access and Monitoring ##
+## Network Access and Monitoring 
 To monitor network access I used NWPathMonitor.  When ever net access changes, the accessibility is stored.  If the access is not possible, an Alert is displayed.  By wrapping the network code in a closure, whenever connectivity is restore, the desired call is made. 
 
 ####`func access( _ completion: @escaping (yes)->() )`
