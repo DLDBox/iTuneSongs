@@ -73,7 +73,6 @@
                                             <state key="selected" image="PlayButtonPressed"/>
                                             <state key="highlighted" image="PlayButtonPressed"/>
                                             <connections>
-                                                <action selector="didTouchPlay:" destination="aip-6H-u2d" eventType="touchUpInside" id="1yb-uu-tEN"/>
                                                 <action selector="didTouchPlay:" destination="YZf-pr-K37" eventType="touchUpInside" id="JKK-nC-MyX"/>
                                             </connections>
                                         </button>

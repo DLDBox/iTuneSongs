@@ -19,7 +19,6 @@ class iTunesTableViewDataSource: NSObject, UITableViewDataSource {
     //MARK: - private member section
     //
     private let dataSource = iTunesDataSource()
-    private var items: [iTunesItem]? = nil
 
     //
     //MARK: - public section
@@ -30,14 +29,11 @@ class iTunesTableViewDataSource: NSObject, UITableViewDataSource {
         NetMinder.shared.accessible( { yes in
             
             self.dataSource.songList(completion: { items in
-                self.items = items
                 completion(true)
             }, failure: {error in
                 completion(false)
             })
-            
         })
-        
     }
     
     func item( at: Int ) -> iTunesItem? {
@@ -49,19 +45,17 @@ class iTunesTableViewDataSource: NSObject, UITableViewDataSource {
     //
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let items = self.items {
-            return items.count
-        }
-        return 0
+        return self.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let iTuneCell = tableView.dequeueReusableCell(withIdentifier: K.cellName) as? iTunesTableCell
+        let iTuneItem = self.dataSource.item(at: indexPath.row)!
         
-        iTuneCell?.set( item: self.items![indexPath.row], index: indexPath.row )
+        iTuneCell?.set( item: iTuneItem, index: indexPath.row )
         iTuneCell?.accessoryType = .disclosureIndicator
         
-        self.dataSource.loadImageFor(item: self.items![indexPath.row], completion: { image in
+        self.dataSource.loadImageFor(item: iTuneItem, completion: { image in
             iTuneCell?.albumIcon.image = image
         })
                 

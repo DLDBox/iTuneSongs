@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-/* This class used the iTunesTableVieDataSource to download
+/* This class uses the iTunesTableVieDataSource object to download
  and supply the iTunes data for display
  
- Each network request is performed within a NetMinder to determine
+ Each network request is performed within a NetMinder.acess() closure to determine
  if network connection exist, if not, the closure is execute once
  the network connection is re-established.
  

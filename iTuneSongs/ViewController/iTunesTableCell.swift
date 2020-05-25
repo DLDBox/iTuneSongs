@@ -28,7 +28,4 @@ class iTunesTableCell: UITableViewCell {
         playButton.tag = index
     }
     
-    @IBAction func didTouchPlay(_ sender: Any) {
-    }
-    
 }

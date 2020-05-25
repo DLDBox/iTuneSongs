@@ -14,12 +14,15 @@ import UIKit
 //
 extension UIAlertController {
 
-    func show() {
+    public func showNow() {
         present(animated: true, completion: nil)
     }
     
-    func hide() {
-        
+    public func hideNow() {
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        if let rootVC = window?.rootViewController {
+            rootVC.dismiss(animated: true, completion: nil)
+        }
     }
 
     func present(animated: Bool, completion: (() -> Void)?) {

@@ -23,7 +23,7 @@ class iTunesDataSource: XMLDelegate {
     
     /* Return the list of iTuneItems parsed from the XML retrieve from the server
      */
-    func songList( completion: @escaping ClosureWithiTunes, failure: @escaping ClosureWithError ) {
+    func songList( completion: @escaping ClosureWithBool, failure: @escaping ClosureWithError ) {
      
         // Load XML string for parsing
         tuneServer.topSongXML( { xmlString in
@@ -32,7 +32,7 @@ class iTunesDataSource: XMLDelegate {
             xmlPathParser.addPaths(paths: EndPoints.XMLPaths)   // Add the parsing criteria (see the XMLPathParser object)
             xmlPathParser.parse()       // parse the XML using the supplied paths
             
-            completion( self.items )
+            completion( true )
         }, failure: failure )
     }
 
@@ -42,8 +42,17 @@ class iTunesDataSource: XMLDelegate {
      allows me to change the internal members without breaking the code which relies on this call.
      */
     func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () ) {
-        tuneServer.loadImageFor( item: item, completion: completion )
+        if let imageURL = item.image {
+            tuneServer.loadImageFor( imageURL: imageURL, completion: completion )
+        } else {
+            print( "unable to load an image" )
+        }
     }
+    
+    //
+    //MARK: - Generic Datasource section
+    //
+    var count: Int { get { return self.items.count }}
     
     /* Get the iTuneItem at a given index
      */

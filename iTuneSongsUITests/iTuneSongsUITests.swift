@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import iTuneSongs
 
 class iTuneSongsUITests: XCTestCase {
 
@@ -31,6 +32,33 @@ class iTuneSongsUITests: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+    
+    func testAlert() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        
+        let exception = expectation(description: "Wait for test to complete")
+        
+        let alert = UIAlertController( title:"This is a test ", message: "Please connect to the internet", preferredStyle: .alert )
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { action in
+            
+        }))
+        
+        alert.showNow()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15, execute: {
+            alert.hideNow()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                exception.fulfill()
+            })
+        })
+        
+        self.waitForExpectations(timeout: 20, handler: nil)
+
+    }
+    
+
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {

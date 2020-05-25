@@ -50,8 +50,6 @@ class NetMinder {
     private func setupCallBack() {
         self.netMonitor.pathUpdateHandler = { path in
             
-            print( "path = \(path)" )
-            
             if path.status == .satisfied {
                 self.isInternetAccessible = true
                 
@@ -60,17 +58,22 @@ class NetMinder {
                     self.connectClosure = nil
                 }
                 
+                DispatchQueue.main.async {
+                    self.alert?.hideNow()
+                    self.alert = nil
+                }
+                
             } else {
                 self.isInternetAccessible = false
                 
                 if self.alert == nil {
                     DispatchQueue.main.async {
                         self.alert = UIAlertController( title:"Network Access Error", message: "Please connect to the internet", preferredStyle: .alert )
-                        self.alert?.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { action in
-                            self.alert = nil
-                        }))
+                        //self.alert?.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { action in
+                         //   self.alert = nil
+                        //}))
                         
-                        self.alert?.show()
+                        self.alert?.showNow()
                     }
                 }
             }

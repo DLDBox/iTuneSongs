@@ -52,11 +52,12 @@ class iTunesServer {
         self.task?.resume()
     }
     
-    func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () ) {
+    //TODO: change item: iTunesItem to imageURL: String
+    func loadImageFor( imageURL: String, completion: @escaping (_ image: UIImage ) -> () ) {
         
-        if let imageURL = item.image,let image = self.imageCache.object(forKey: NSString(string: imageURL)) {
+        if let image = self.imageCache.object(forKey: NSString(string: imageURL)) {
             completion( image )
-        } else if let imageURL = item.image, let url = URL(string: imageURL) {
+        } else if let url = URL(string: imageURL) {
             
             self.task = self.session.dataTask(with: url, completionHandler: { (data, response, error) in
                 
