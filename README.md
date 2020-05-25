@@ -76,8 +76,8 @@ For XML as complex as those used by iTunes, there might be duplicate elements wi
         let parser = XMLPathParser( xmlString: xml, delegate: self )
         
         parser.addPath(path: "items.item.id@attrib1,attrib2", id: 1)
-        parser.addPath(path: "items.item.id@attrib4,attrib5", id: 1)
-        parser.addPath(path: "items.item.tag@name,job", id: 2)
+        parser.addPath(path: "items.item.id@attrib4,attrib5", id: 2)
+        parser.addPath(path: "items.item.tag@name,job", id: 3)
 
         parser.parse()
 
