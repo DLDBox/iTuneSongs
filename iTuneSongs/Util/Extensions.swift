@@ -33,15 +33,11 @@ extension UIAlertController {
     }
 
      private func presentFromController(controller: UIViewController, animated: Bool, completion: (() -> Void)?) {
-           if let navVC = controller as? UINavigationController,
-               let visibleVC = navVC.visibleViewController {
-               presentFromController(controller: visibleVC, animated: animated, completion: completion)
-           } else
-               if let tabVC = controller as? UITabBarController,
-                   let selectedVC = tabVC.selectedViewController {
-                   presentFromController(controller: selectedVC, animated: animated, completion: completion)
-               } else {
-                   controller.present(self, animated: animated, completion: completion);
+           if let nav = controller as? UINavigationController,
+               let currentViewController = nav.visibleViewController {
+               presentFromController(controller: currentViewController, animated: animated, completion: completion)
+           } else {
+               controller.present(self, animated: animated, completion: completion);
            }
        }
 }
