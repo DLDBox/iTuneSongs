@@ -73,10 +73,8 @@ class iTunesListViewController: UITableViewController {
             print( "Error finding the DetailViewController" )
         }
     }
-    
-    //
-    //MARK: - helper section
-    //
+
+    // The play button function, to play the audio just launch the preview URL into a webkit view
     @IBAction func didTouchPlay(_ sender: UIButton) {
         NetMinder.shared.accessible { yes in
             

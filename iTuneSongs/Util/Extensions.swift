@@ -12,6 +12,9 @@ import UIKit
 //
 //MARK: - UIAlertController Extension section
 //
+
+/* Create some convenience functions for the UIAlertController
+ */
 extension UIAlertController {
 
     public func showNow() {

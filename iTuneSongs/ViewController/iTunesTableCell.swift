@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+/* This is the table view cell used to dispaly the iTunesItem
+ 
+ NOTE: the play button is triggered in the iTunesListViewController code
+ */
+
 class iTunesTableCell: UITableViewCell {
     
     @IBOutlet weak var albumIcon: UIImageView!
@@ -20,6 +25,7 @@ class iTunesTableCell: UITableViewCell {
     //MARK: - public section
     //
     
+    //Set the iTuneItem data for this Cell
     func set( item: iTunesItem, index: Int ) {
         
         self.iTunesTitle.text = item.title

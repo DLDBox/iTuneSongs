@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+/* This object is response for connection and downloading the XML and images from the XML
+ */
 class iTunesServer {
     
     //
@@ -24,6 +26,9 @@ class iTunesServer {
     
     /* A function to retrieve the XML from the Endpoint.topSong.
      
+     PARAMETER:
+        completion - A closure which is called once the XML file is downloaded.
+        failure - A closure which is called if there is an error
      */
     func topSongXML( _ completion: @escaping ClosureWithString, failure: @escaping ClosureWithError ) {
         
@@ -51,8 +56,13 @@ class iTunesServer {
         
         self.task?.resume()
     }
-    
-    //TODO: change item: iTunesItem to imageURL: String
+
+    /* This function is designed to download image data spec in the XML file
+     
+     PARAMETERS:
+        imageURL - The image URL string
+        completion - called with the Imaged loaded from the server or a placeholder image
+     */
     func loadImageFor( imageURL: String, completion: @escaping (_ image: UIImage ) -> () ) {
         
         if let image = self.imageCache.object(forKey: NSString(string: imageURL)) {

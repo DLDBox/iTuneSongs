@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+/* This is a UITableViewDataSource, it uses the iTuneDataSource to
+ Retreive and supply the data for this Data Source
+ */
 class iTunesTableViewDataSource: NSObject, UITableViewDataSource {
     
     struct K {
@@ -24,6 +27,12 @@ class iTunesTableViewDataSource: NSObject, UITableViewDataSource {
     //MARK: - public section
     //
     
+    /* CAll this function to load the XML stored at EndPoint.topSongs, which should be an XML with the list of
+     the most popular songs.
+     
+     PARAMETER:
+        completion - Called once the song are all loaded
+     */
     func loadSongs( completion: @escaping ClosureWithBool ) {
         
         NetMinder.shared.accessible( { yes in
@@ -36,6 +45,13 @@ class iTunesTableViewDataSource: NSObject, UITableViewDataSource {
         })
     }
     
+    /* Return the iTuneItem at a particular index
+     
+     PARAMETER:
+        at - The index to retrienve
+     
+     RETURN: The iTuenItem at that index or nil if to large
+     */
     func item( at: Int ) -> iTunesItem? {
         return self.dataSource.item(at:at)
     }

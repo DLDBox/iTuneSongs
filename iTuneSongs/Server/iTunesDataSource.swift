@@ -8,9 +8,14 @@
 
 import Foundation
 import UIKit
-/* This object is designed to encapsulate the iTuneServer process
- It handle download and the parsing of the iTune XML file
 
+/* This object is designed to encapsulate the iTuneServer process
+ It handle downloading and the parsing of the iTune XML file
+ 
+ Afterwards is makes the data available as a generic data source for use in
+ UI data source like UICollectionDataSource and UITableViewDataSource, etc
+ 
+ This object parses the XML using a XMLPathParser.
  */
 class iTunesDataSource: XMLDelegate {
     
@@ -27,7 +32,7 @@ class iTunesDataSource: XMLDelegate {
      
         // Load XML string for parsing
         tuneServer.topSongXML( { xmlString in
-            let xmlPathParser = XMLPathParser(xmlString: xmlString, delegate: self) // setup the XML parser
+            let xmlPathParser = XMLPathParser(xmlString: xmlString, delegate: self) // setup the XML path parser
             
             xmlPathParser.addPaths(paths: EndPoints.XMLPaths)   // Add the parsing criteria (see the XMLPathParser object)
             xmlPathParser.parse()       // parse the XML using the supplied paths
@@ -37,7 +42,9 @@ class iTunesDataSource: XMLDelegate {
     }
 
     /* Function to load the image from the server
-     Seem weird to have a one line function, actually, not at all.  This is object abstraction.
+     
+     This is object abstraction.
+     
      The internal detail should not be accessible in a true object orient environment.  This
      allows me to change the internal members without breaking the code which relies on this call.
      */
@@ -52,6 +59,8 @@ class iTunesDataSource: XMLDelegate {
     //
     //MARK: - Generic Datasource section
     //
+    
+    // return the number of items
     var count: Int { get { return self.items.count }}
     
     /* Get the iTuneItem at a given index
@@ -66,7 +75,21 @@ class iTunesDataSource: XMLDelegate {
     //
     //MARK: - XMLDelegate Section
     //
-    
+
+    /* Here is where the iTuneItems are populated and stored in the internal array
+     
+     This call is made is there are no attributes in the element
+     
+     This function is called whenever the XML parser reaches a path specified by the
+     developer as it transverses the XML file.  The function code can easily determine the
+     data being send by it ID parameter
+     
+     PARAMETERS:
+        parser - The XMLPathParser object doing the work
+        path - The path in the XML where this data was read
+        id - The path id which should be mapped to a member in the iTuneItems calss
+        string - The actual data
+     */
     func didEncounterPath(parser: XMLPathParser, path: String, id: Any, string: String) {
         
         if let current = self.currentItem {
@@ -78,6 +101,19 @@ class iTunesDataSource: XMLDelegate {
         }
     }
     
+    /* Here is where the iTuneItems are populated and stored in the internal array
+     
+     This function is called whenever the XML parser reaches a path specified by the
+     developer as it transverses the XML file.  The function code can easily determine the
+     data being send by it ID parameter
+     
+     PARAMETERS:
+        parser - The XMLPathParser object doing the work
+        path - The path in the XML where this data was read
+        id - The path id which should be mapped to a member in the iTuneItems calss
+        string - The actual data
+        attributes - The attributes for this element
+     */
     func didEncounterPath(parser: XMLPathParser, path: String, id: Any, string: String, attributes: [String : String]) {
         
         if let current = self.currentItem {
@@ -94,12 +130,14 @@ class iTunesDataSource: XMLDelegate {
         }
     }
     
+    // called at the start of a new element
     func didStartElement( parser: XMLPathParser, element: String ) {
         if element == K.dataElement {
             self.currentItem = iTunesItem()
         }
     }
     
+    // called at the end of a new element
     func didEndElement( parser: XMLPathParser, element: String ) {
         if element == K.dataElement, let currentItem = self.currentItem {
             self.items.append(currentItem)
@@ -107,10 +145,12 @@ class iTunesDataSource: XMLDelegate {
         }
     }
     
+    // Error processing, should have this happen
     func parse(_ parser: XMLPathParser, _ error: Error) {
         print( "\(#function)" )
     }
     
+    // Error processing, should have this happen
     func validation(_ parser: XMLPathParser, _ error: Error) {
         print( "\(#function)" )
     }

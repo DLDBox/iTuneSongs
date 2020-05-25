@@ -7,6 +7,12 @@ Written by Dana Devoe
 This is a simple application used to demonstrate downloading a XML file containing a list of of popular songs on iTunes. Parsing the XML into items of iTune elements and displaying the covert art for each item along with Song title and artist in a tableview.
 
 For this challenge I followed the Object Oriented coding concepts.  I used data encapsulation and aggregation.  I used TDD but I did not completely construct the test to proved automated tests but mostly to help debug the code as I was creating it.  The XMLParsing is where I spent most of my time.  I flushed it out perhaps a bit more then I should have and I could have added the ability to convert the XML endpoints into JSON and then use Decoder to make the data loading a bit more straightforward.  However, I think that would have taken a bit more time.
+
+## Code overview
+
+![App Objects][file://./iTunesAppDiagram.png]
+
+
 ## Server Access
 And EndPoint structure contains the server url strings, along with XML parsing paths.  The object `iTunesServer` is designed to access the url at EndPoint.topSongs.  It download the XML and delivers it in a closure. 
 

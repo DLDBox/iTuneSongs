@@ -9,12 +9,14 @@
 import Foundation
 import UIKit
 
+/* This is the iTune data that will be display in the Table view
+ */
 class iTunesItem {
     
-    var title: String? = nil
-    var artist: String? = nil
-    var art: String? = nil
-    var image: String? = nil
-    var preview: String? = nil
+    var title: String? = nil // Album Title
+    var artist: String? = nil // Artist name
+    var art: String? = nil // The album info page url string
+    var image: String? = nil // The album cover art url string
+    var preview: String? = nil // The audio preview url string
 }
 

@@ -8,6 +8,10 @@
 
 import Foundation
 
+/* The XML delegate used to tell the listener whenever a specified path has been encountered
+ The specified path will have string data and some type attribute data, but they will have an
+ ID to identify which path has been encountered
+ */
 protocol XMLDelegate {
     
     func didEncounterPath( parser: XMLPathParser, path: String, id: Any, string: String )
@@ -65,7 +69,13 @@ class XMLPathParser: NSObject, XMLParserDelegate {
     //
     //MARK: - Object life cycle
     //
-    
+
+    /* Initialize the XMLPathParser with the XML to be parsed
+     
+     PARAMETERS:
+        xmlData - The xml data to be parsed
+        delegate - the listen which will be recieve the path info
+     */
     init( xmlData: Data, delegate: XMLDelegate ) {
         self.parser = XMLParser(data: xmlData)
         self.delegate = delegate
@@ -75,6 +85,12 @@ class XMLPathParser: NSObject, XMLParserDelegate {
         self.parser.delegate = self
     }
     
+    /* Initialize the XMLPathParser with the XML to be parsed
+     
+     PARAMETERS:
+        xmlData - The xml as a string to be parsed
+        delegate - the listen which will be recieve the path info
+     */
     convenience init( xmlString: String, delegate: XMLDelegate ) {
         let xmlData = xmlString.data(using: .utf8)!
         self.init(xmlData:xmlData, delegate:delegate )
@@ -114,7 +130,8 @@ class XMLPathParser: NSObject, XMLParserDelegate {
         let attributeKeys = self.attributePath(pathString: path, at: "@")
         self.userPaths[pathOnly == "" ? path : pathOnly] = (attributeKeys,id)
     }
-    
+
+    // same as above only with teh paths stored in a dictionary
     func addPaths( paths: [String : Any] ) {
         for (key, value) in paths {
             self.addPath(path: key, id: value)
@@ -129,9 +146,6 @@ class XMLPathParser: NSObject, XMLParserDelegate {
     //
     //MARK: - XMLParserDelegate Section
     //
-    internal func parserDidEndDocument(_ parser: XMLParser ) {
-        
-    }
     
     internal func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         self.pushContext()
