@@ -123,6 +123,10 @@ class XMLPathParser: NSObject, XMLParserDelegate {
      parser.addPath( path: "XML.People.phone", id: 4 )
      
      parser.parse()
+     
+     PARAMETER:
+        path - A path to add to the internal list of paths
+        id - The id of the given path, should be unique
 
      */
     func addPath( path: String, id: Any ) {
@@ -132,6 +136,11 @@ class XMLPathParser: NSObject, XMLParserDelegate {
     }
 
     // same as above only with teh paths stored in a dictionary
+    /*
+     
+     PARAMETER:
+        paths - A dictionary of paths (key) and id (value)
+     */
     func addPaths( paths: [String : Any] ) {
         for (key, value) in paths {
             self.addPath(path: key, id: value)

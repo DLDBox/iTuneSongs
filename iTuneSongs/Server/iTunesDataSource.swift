@@ -27,6 +27,10 @@ class iTunesDataSource: XMLDelegate {
     private var currentItem: iTunesItem? = nil  // The next iTune item to be inserted into the items array
     
     /* Return the list of iTuneItems parsed from the XML retrieve from the server
+     
+     PARAMETER:
+        completion - a Closure with is called once the list of iTune Items are loaded
+        failure - a closure called whenever there is a error
      */
     func songList( completion: @escaping ClosureWithBool, failure: @escaping ClosureWithError ) {
      
@@ -47,8 +51,12 @@ class iTunesDataSource: XMLDelegate {
      
      The internal detail should not be accessible in a true object orient environment.  This
      allows me to change the internal members without breaking the code which relies on this call.
+     
+     PARAMETER:
+        item - The iTunesItem with the to load
+        completion - The closure which is called with the loaded image
      */
-    func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () ) {
+    func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage) -> () ) {
         if let imageURL = item.image {
             tuneServer.loadImageFor( imageURL: imageURL, completion: completion )
         } else {
@@ -64,6 +72,9 @@ class iTunesDataSource: XMLDelegate {
     var count: Int { get { return self.items.count }}
     
     /* Get the iTuneItem at a given index
+     
+     PARAMETER:
+        at - The index of the iTuneItems of interest or nil if out of bounds
      */
     func item( at: Int ) -> iTunesItem? {
         if at < self.items.count {
