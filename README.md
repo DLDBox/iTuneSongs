@@ -4,20 +4,20 @@ Written by Dana Devoe
 
 ## A coding challenge
 
-This is a simple application used to demonstrate downloading a XML file containing a list of of popular songs on iTunes. Parsing the XML into items of iTune elements and displaying the covert art for each item along with Song title and artist in a tableview.
+This is a simple application used to demonstrate downloading a XML file containing a list of popular songs on iTunes. Parsing the XML into items of iTune elements and displaying the cover art for each item along with Song title and artist in a tableview.
 
-For this challenge I followed the Object Oriented coding concepts.  I used data encapsulation and aggregation.  I used TDD but I did not completely construct the test to proved automated tests but mostly to help debug the code as I was creating it.  The XMLParsing is where I spent most of my time.  I flushed it out perhaps a bit more then I should have and I could have added the ability to convert the XML endpoints into JSON and then use Decoder to make the data loading a bit more straightforward.  However, I think that would have taken a bit more time.
+For this challenge I followed the Object Oriented coding concepts.  I used data encapsulation and aggregation.  I used TDD but I did not completely construct the tests to provide automated tests but mostly to help debug the code as I was creating it.  The XMLParsing is where I spent most of my time.  I flushed it out perhaps a bit more then I should have and I could have added the ability to convert the XML endpoints into JSON and then use Decoder to make the data loading a bit more straightforward.  However, I think that would have taken a bit more time.
 
 ## Code overview
 
 ![App Objects](https://github.com/DLDBox/iTuneSongs/blob/master/iTunesAppDiagram.png?raw=true)
 
 ## Server Access
-And EndPoint structure contains the server url strings, along with XML parsing paths.  The object `iTunesServer` is designed to access the url at EndPoint.topSongs.  It download the XML and delivers it in a closure. 
+And EndPoint structure contains the server url strings, along with XML parsing paths.  The object `iTunesServer` is designed to access the url at EndPoint.topSongs.  It downloads the XML and delivers it in a closure. 
 
 `func topSongXML( _ completion: @escaping ClosureWithString, failure: @escaping ClosureWithError )`
 
- The object also handle the loading of the album art in the call:
+ The object also handles the loading of the album art in the call:
 
 `func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () )`
 
@@ -32,7 +32,7 @@ XML Parsing
 This object implements UITableViewDataSource protocol, while aggregating the iTunesDataSource.
 
 ### XML Path Parsing
-This application will demonstrate a XML object XMLPathParse which is designed to make parsing complex XML files much simpler.  A path is provided which represent a XML element to a string, or attribute of interest within the XML.  The XMLPathParse is giving the paths with an accompanying ID.  As the XMLPathParse executes, it calls out to the XMLDelegate when it finds path matches.  
+This application will demonstrate XML parsing using a object called XMLPathParse which is designed to make parsing complex XML files much simpler.  A path is provided which points to an XML element string or attribute of interest within the XML.  The XMLPathParse is giving the paths with an accompanying ID.  As the XMLPathParse executes, it calls out to the XMLDelegate when it finds path matches.  
 
         let xml =
         """
@@ -76,12 +76,13 @@ For XML as complex as those used by iTunes, there might be duplicate elements wi
         let parser = XMLPathParser( xmlString: xml, delegate: self )
         
         parser.addPath(path: "items.item.id@attrib1,attrib2", id: 1)
+        parser.addPath(path: "items.item.id@attrib4,attrib5", id: 1)
         parser.addPath(path: "items.item.tag@name,job", id: 2)
 
         parser.parse()
 
 ## Network Access and Monitoring 
-To monitor network access,  NWPathMonitor is agregated into the NetMinder object.  Whenever net access changes, the accessibility is stored.  If the access is not possible, an Alert is displayed.  By wrapping the network code in a closure, whenever connectivity is restored, the specified call is made. 
+To monitor network access,  NWPathMonitor is aggregated into the NetMinder object.  Whenever net access changes, the accessibility is stored.  If the access is not possible, an Alert is displayed.  By wrapping the network code in a closure, whenever connectivity is restored, the specified call is made. 
 
 `func access( _ completion: @escaping (yes)->() )`
 
