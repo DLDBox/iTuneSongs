@@ -10,7 +10,7 @@ For this challenge I followed the Object Oriented coding concepts.  I used data 
 
 ## Code overview
 
-![App Objects][file://./iTunesAppDiagram.png]
+![App Objects][https://github.com/DLDBox/iTuneSongs.git/iTunesAppDiagram.png]
 
 
 ## Server Access
