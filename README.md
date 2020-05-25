@@ -1,8 +1,8 @@
-#iTuneSongs
+# iTuneSongs
 List popular iTunes songs
 Written by Dana Devoe
 
-##A coding challenge
+## A coding challenge
 
 This is a simple application used to demonstrate downloading a list XML file containing a list of of popular songs on iTunes parsing the XML into items of iTune elements and displaying the covert art for each item along with Song title and artist in a tableview.
 
@@ -10,11 +10,11 @@ For this challenge I followed the Object Oriented coding concepts.  I used Data 
 ## Server Access
 And EndPoint structure contains the server url strings. Along with XML parsing paths.  The object `iTunesServer` is designed to access the url at EndPoint.topSongs.  It download the XML and delivers it in a closure. 
 
-####`func topSongXML( _ completion: @escaping ClosureWithString, failure: @escaping ClosureWithError )`
+#### `func topSongXML( _ completion: @escaping ClosureWithString, failure: @escaping ClosureWithError )`
 
  The object also handle the loading of the album art in the call:
 
-####`func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () )`
+#### `func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () )`
 
 XML Parsing
 
@@ -24,11 +24,11 @@ XML Parsing
 
 The above call returns a 
 
-####iTunesTableViewDataSource
+#### iTunesTableViewDataSource
 
 This object implements UITableViewDataSource protocol, while aggregating the iTunesDataSource.
 
-###XML Path Parsing
+### XML Path Parsing
 This application will demonstrate a XML object XMLPathParse which is designed to make parsing complex XML files much simpler.  A path is provided which represent the XML element to a string, or attribute of interest with in the XML.  The XMLPathParse is giving the paths with an accompanying ID.  As the XMLPathParse executes, it calls out to the XMLDelegate when it finds Path matches.  
 
         let xml =
@@ -80,7 +80,7 @@ For XML as complex as used by iTunes, there might be duplicate tags with attribu
 ## Network Access and Monitoring 
 To monitor network access I used NWPathMonitor.  When ever net access changes, the accessibility is stored.  If the access is not possible, an Alert is displayed.  By wrapping the network code in a closure, whenever connectivity is restore, the desired call is made. 
 
-####`func access( _ completion: @escaping (yes)->() )`
+#### `func access( _ completion: @escaping (yes)->() )`
 
 Example usage:
 
