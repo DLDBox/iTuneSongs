@@ -10,8 +10,7 @@ For this challenge I followed the Object Oriented coding concepts.  I used data 
 
 ## Code overview
 
-![App Objects][file://./iTunesAppDiagram.png]
-
+![App Objects](https://github.com/DLDBox/iTuneSongs/blob/master/iTunesAppDiagram.png?raw=true)
 
 ## Server Access
 And EndPoint structure contains the server url strings, along with XML parsing paths.  The object `iTunesServer` is designed to access the url at EndPoint.topSongs.  It download the XML and delivers it in a closure. 
@@ -33,7 +32,7 @@ XML Parsing
 This object implements UITableViewDataSource protocol, while aggregating the iTunesDataSource.
 
 ### XML Path Parsing
-This application will demonstrate a XML object XMLPathParse which is designed to make parsing complex XML files much simpler.  A path is provided which represent a XML element to a string, or attribute of interest within the XML.  The XMLPathParse is giving the paths with an accompanying ID.  As the XMLPathParse executes, it calls out to the XMLDelegate when it finds Path matches.  
+This application will demonstrate a XML object XMLPathParse which is designed to make parsing complex XML files much simpler.  A path is provided which represent a XML element to a string, or attribute of interest within the XML.  The XMLPathParse is giving the paths with an accompanying ID.  As the XMLPathParse executes, it calls out to the XMLDelegate when it finds path matches.  
 
         let xml =
         """
@@ -82,7 +81,7 @@ For XML as complex as those used by iTunes, there might be duplicate elements wi
         parser.parse()
 
 ## Network Access and Monitoring 
-To monitor network access I aggregate NWPathMonitor into the object NetMinder.  When ever net access changes, the accessibility is stored.  If the access is not possible, an Alert is displayed.  By wrapping the network code in a closure, whenever connectivity is restore, the desired call is made. 
+To monitor network access,  NWPathMonitor is agregated into the NetMinder object.  Whenever net access changes, the accessibility is stored.  If the access is not possible, an Alert is displayed.  By wrapping the network code in a closure, whenever connectivity is restored, the specified call is made. 
 
 `func access( _ completion: @escaping (yes)->() )`
 
