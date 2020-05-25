@@ -10,11 +10,11 @@ For this challenge I followed the Object Oriented coding concepts.  I used Data 
 ## Server Access
 And EndPoint structure contains the server url strings. Along with XML parsing paths.  The object `iTunesServer` is designed to access the url at EndPoint.topSongs.  It download the XML and delivers it in a closure. 
 
-#### `func topSongXML( _ completion: @escaping ClosureWithString, failure: @escaping ClosureWithError )`
+`func topSongXML( _ completion: @escaping ClosureWithString, failure: @escaping ClosureWithError )`
 
  The object also handle the loading of the album art in the call:
 
-#### `func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () )`
+`func loadImageFor( item: iTunesItem, completion: @escaping (_ image: UIImage ) -> () )`
 
 XML Parsing
 
@@ -94,5 +94,12 @@ Example usage:
             })
             
         })
-If there is not connectivity the closure is not called, until a connection is made.
+If there is no connectivity the closure is not called until a connection is made.
+
+## iTunesListViewController ##
+The list of iTuneItems, utilizing the iTunesTableViewDataSource to act as the UITableViewDataSource.
+
+## iTunesDetailViewController ##
+
+Used to display the detail page of the artist and to play the preview audio track.
 
