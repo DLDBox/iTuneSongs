@@ -106,4 +106,4 @@ The list of iTuneItems, utilizing the iTunesTableViewDataSource to act as the UI
 ## iTunesDetailViewController ##
 Used to display the detail page of the artist and to play the preview audio track.
 
-![screen shot](https://github.com/DLDBox/iTuneSongs/blob/master/screenshot.png)
+![screen shot](https://github.com/DLDBox/iTuneSongs/blob/master/ScreenShot.png)
