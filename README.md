@@ -10,7 +10,7 @@ For this challenge I followed the Object Oriented coding concepts.  I used data 
 
 ## Code overview
 
-![App Objects][https://github.com/DLDBox/iTuneSongs/blob/master/iTunesAppDiagram.png?raw=true]
+![App Objects](https://github.com/DLDBox/iTuneSongs/blob/master/iTunesAppDiagram.png?raw=true)
 
 ## Server Access
 And EndPoint structure contains the server url strings, along with XML parsing paths.  The object `iTunesServer` is designed to access the url at EndPoint.topSongs.  It download the XML and delivers it in a closure. 
